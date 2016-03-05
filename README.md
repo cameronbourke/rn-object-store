@@ -14,12 +14,15 @@ npm install --save rn-object-store
 The api surface for rn-object-store is really small. There are only three methods available: `get, set, remove`.
 
 Save a key and associated value.
+
 `.set([String path], [value])`
 
 Get a value for the given path.
+
 `.get([String path])`
 
 Delete the value associated with a given path and remove the key.
+
 `.remove([String path])`
 
 **Note** `path` is string that represents the path to the value you want to interact on. For example, say you've got an object with the key `movies` in `AsyncStorage`, that has a nested object with the key `shawshank_redemption`, with a property named `released`. To get that value, you simply would pass that to the `get` method like so:
