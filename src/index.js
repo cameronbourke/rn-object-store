@@ -8,7 +8,7 @@ const splitPath = (path) => {
 	return path.split(divider);
 }
 
-const get = (path, defaultValue = {}) => {
+export const get = (path, defaultValue = {}) => {
 	const paths = splitPath(toString(path));
 	const [key, ...nestedProps] = paths;
 
@@ -38,7 +38,9 @@ const set = (path, value) => {
 			.then(() => resolve({ key }));
 		};
 
-		if (nestedProps.length < 1) setItem(key, value);
+		if (nestedProps.length < 1) {
+			setItem(key, value);
+		}
 
 		else {
 			get(key).then((target) => {
@@ -56,7 +58,7 @@ const set = (path, value) => {
 	});
 };
 
-const remove = (path, returnValue) => {
+export const remove = (path, returnValue) => {
 	const paths = splitPath(toString(path));
 	const [key, ...nestedProps] = paths;
 
@@ -85,7 +87,7 @@ const remove = (path, returnValue) => {
 	});
 };
 
-const findNestedValue = (target, cb, keys, error, index = 0) => {
+export const findNestedValue = (target, cb, keys, error, index = 0) => {
 	const key = keys[index];
 	const value = target[key];
 
@@ -99,7 +101,7 @@ const findNestedValue = (target, cb, keys, error, index = 0) => {
 			return false;
 		}
 
-		if (!isObject(parsedValue)) {
+		if (!isObject(value)) {
 			error({ message: `${key} is not an object`, key });
 			return false;
 		}
@@ -108,8 +110,10 @@ const findNestedValue = (target, cb, keys, error, index = 0) => {
 	getNestedValue(value, defaultValue, keys, index + 1);
 };
 
-export default {
+const api = {
 	get,
 	set,
 	remove
 };
+
+export default api;
