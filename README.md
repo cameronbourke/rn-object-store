@@ -29,6 +29,10 @@ Delete the value associated with a given path and remove the key.
 
 ```js
 store.get('movies/shawshank_redemption/released')
+/*
+can also separate by using the dot operator: 'movies.shawshank_redemption.released'
+if that feels more comfortable than using a forward slash
+*/
 .then((value) => console.log(value))
 // would log out --> 1994
 ```
