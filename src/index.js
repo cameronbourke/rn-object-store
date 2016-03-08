@@ -8,7 +8,7 @@ const splitPath = (path) => {
 	return path.split(divider);
 }
 
-export const get = (path, defaultValue = {}) => {
+const get = (path, defaultValue = {}) => {
 	const paths = splitPath(toString(path));
 	const [key, ...nestedProps] = paths;
 
@@ -19,7 +19,8 @@ export const get = (path, defaultValue = {}) => {
 
 			const parsedValue = JSON.parse(value);
 			const getValue = (target, key, currentValue) => (currentValue === undefined) ? defaultValue : currentValue;
-			const resolved = (nestedProps.length > 0) ? findNestedValue(parsedValue, getValue, nestedProps, reject) : parsedValue;
+			const resolved = (nestedProps.length > 0) ?
+			findNestedValue(parsedValue, getValue, nestedProps, reject) : (parsedValue || defaultValue)
 
 			resolve(resolved);
 		});
@@ -38,9 +39,7 @@ const set = (path, value) => {
 			.then(() => resolve({ key }));
 		};
 
-		if (nestedProps.length < 1) {
-			setItem(key, value);
-		}
+		if (nestedProps.length < 1) setItem(key, value);
 
 		else {
 			get(key).then((target) => {
@@ -58,7 +57,7 @@ const set = (path, value) => {
 	});
 };
 
-export const remove = (path, returnValue) => {
+const remove = (path, returnValue) => {
 	const paths = splitPath(toString(path));
 	const [key, ...nestedProps] = paths;
 
@@ -87,7 +86,7 @@ export const remove = (path, returnValue) => {
 	});
 };
 
-export const findNestedValue = (target, cb, keys, error, index = 0) => {
+const findNestedValue = (target, cb, keys, error, index = 0) => {
 	const key = keys[index];
 	const value = target[key];
 
@@ -107,13 +106,11 @@ export const findNestedValue = (target, cb, keys, error, index = 0) => {
 		}
 	}
 
-	getNestedValue(value, defaultValue, keys, index + 1);
+	findNestedValue(value, defaultValue, keys, index + 1);
 };
 
-const api = {
+export default {
 	get,
 	set,
 	remove
 };
-
-export default api;
