@@ -1,6 +1,6 @@
 {
   "name": "rn-object-store",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A lightweight wrapper around React Native's AsyncStorage, which makes working with objects in AsyncStorage a breeze.",
   "main": "dist/index.js",
   "scripts": {
@@ -21,10 +21,10 @@
   "author": "Cameron Bourke <cameron2295@gmail.com> (http://cameronbourke.com/)",
   "license": "MIT",
   "dependencies": {
-    "native-promise-only": "^0.8.1"
+    "native-promise-only": "0.x"
   },
   "peerDependencies": {
-    "react-native": "^0.20.0"
+    "react-native": "0.x"
   },
   "devDependencies": {
     "babel-cli": "6.6.4",
