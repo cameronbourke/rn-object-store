@@ -1,6 +1,6 @@
 {
   "name": "rn-object-store",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A lightweight wrapper around React Native's AsyncStorage, which makes working with objects in AsyncStorage a breeze.",
   "main": "dist/index.js",
   "scripts": {
@@ -14,6 +14,9 @@
     "async-storage",
     "local-storage",
     "react"
+  ],
+  "files": [
+    "dist"
   ],
   "author": "Cameron Bourke <cameron2295@gmail.com> (http://cameronbourke.com/)",
   "license": "MIT",
