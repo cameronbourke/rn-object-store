@@ -17,10 +17,12 @@ const get = (path, defaultValue = {}) => {
 
 		.then((value) => {
 
+			if (value === null) reject({ message: `${key} is undefined`, key });
+
 			const parsedValue = JSON.parse(value);
 			const getValue = (target, key, currentValue) => (currentValue === undefined) ? defaultValue : currentValue;
 			const resolved = (nestedProps.length > 0) ?
-			findNestedValue(parsedValue, getValue, nestedProps, reject) : (parsedValue || defaultValue)
+			findNestedValue(parsedValue, getValue, nestedProps, reject) : (parsedValue || defaultValue);
 
 			resolve(resolved);
 		});
